@@ -79,18 +79,19 @@ mkdir -p "$config_dir"
 ln -s "$repo_dir/AGENTS.md" "$config_dir/AGENTS.md"
 ln -s "$repo_dir/agents" "$config_dir/agents"
 ollama pull qwen3.8:27b
+
+# OpenCode requires at least a 64K context window for local coding agents. If
+# Ollama is not managed by the desktop app or a system service, start it with:
+export OLLAMA_CONTEXT_LENGTH=64000 # in .bashrc or someplace like that
+
+# check if ollama is running
+curl http://127.0.0.1:11434/api/tags
+
+# if not running:
+systemctl ollama start
+# or
+ollama serve
 ```
-
-OpenCode requires at least a 64K context window for local coding agents. If
-Ollama is not managed by the desktop app or a system service, start it with:
-
-```shell
-OLLAMA_CONTEXT_LENGTH=64000 ollama serve
-```
-
-Otherwise, configure the same context length in the app or service environment.
-Use `ollama ps` while the model is loaded to verify that its `CONTEXT` is at
-least `64000`.
 
 Register the local model and select the orchestrator in
 `~/.config/opencode/opencode.json`:
