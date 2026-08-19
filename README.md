@@ -81,6 +81,17 @@ ln -s "$repo_dir/agents" "$config_dir/agents"
 ollama pull qwen3.8:27b
 ```
 
+OpenCode requires at least a 64K context window for local coding agents. If
+Ollama is not managed by the desktop app or a system service, start it with:
+
+```shell
+OLLAMA_CONTEXT_LENGTH=64000 ollama serve
+```
+
+Otherwise, configure the same context length in the app or service environment.
+Use `ollama ps` while the model is loaded to verify that its `CONTEXT` is at
+least `64000`.
+
 Register the local model and select the orchestrator in
 `~/.config/opencode/opencode.json`:
 
@@ -106,4 +117,8 @@ Register the local model and select the orchestrator in
 }
 ```
 
-Ensure Ollama is running before starting OpenCode.
+## Run
+
+Ensure Ollama is running, then start OpenCode and run `/connect`. Select
+**OpenAI**, choose **ChatGPT Plus/Pro**, and complete browser authentication so
+the orchestrator and cloud escalation agents can use the OpenAI models.
