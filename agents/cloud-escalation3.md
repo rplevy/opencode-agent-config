@@ -3,7 +3,6 @@ description: Maximum-reasoning cloud specialist reserved for exceptionally diffi
 mode: subagent
 model: openai/gpt-5.6-luna
 reasoningEffort: max
-permission:
 permissions:
   - action: subagent
     resource: "*"
