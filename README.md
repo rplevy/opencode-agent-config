@@ -98,7 +98,8 @@ Register the local model and select the orchestrator in
       "models": {
         "qwen3.8:27b": {
           "name": "Qwen3.8 27B"
-        }
+        },
+      "subagent_depth": 1
       }
     }
   }
