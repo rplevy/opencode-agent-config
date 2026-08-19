@@ -1,11 +1,10 @@
 ---
 description: Strong cloud subagent for difficult, ambiguous, cross-cutting, or reasoning-intensive software engineering problems
 mode: subagent
-model: openai/gpt-5.6-luna#high
-permissions:
-  - action: subagent
-    resource: "*"
-    effect: deny
+model: openai/gpt-5.6-luna
+reasoningEffort: high
+permission:
+  task: deny
 ---
 
 Handle difficult software-engineering problems delegated by the primary

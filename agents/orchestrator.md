@@ -2,11 +2,9 @@
 description: Primary software engineering orchestrator
 mode: primary
 model: openai/gpt-5.6-sol
-reasoningEffort: high
-permissions:
-  - action: subagent
-    resource: "*"
-    effect: allow
+reasoningEffort: medium
+permission:
+  task: allow
 ---
 
 You are the primary software engineering agent.

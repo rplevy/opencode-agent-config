@@ -2,10 +2,8 @@
 description: Local coding worker for straightforward bounded implementation, tests, refactors, and bug fixes
 mode: subagent
 model: ollama/qwen3.8:27b
-permissions:
-  - action: subagent
-    resource: "*"
-    effect: deny
+permission:
+  task: deny
 ---
 
 Complete the specific software-engineering task delegated to you.

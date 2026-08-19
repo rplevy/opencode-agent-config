@@ -2,16 +2,10 @@
 description: Fast local read-only agent for repository exploration, code search, call-path tracing, and locating relevant implementations
 mode: subagent
 model: ollama/qwen3.8:27b
-permissions:
-  - action: edit
-    resource: "*"
-    effect: deny
-  - action: shell
-    resource: "*"
-    effect: deny
-  - action: subagent
-    resource: "*"
-    effect: deny
+permission:
+  edit: deny
+  bash: deny
+  task: deny
 ---
 
 Investigate the codebase to answer the assigned question.

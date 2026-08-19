@@ -3,10 +3,8 @@ description: Maximum-reasoning cloud specialist reserved for exceptionally diffi
 mode: subagent
 model: openai/gpt-5.6-luna
 reasoningEffort: max
-permissions:
-  - action: subagent
-    resource: "*"
-    effect: deny
+permission:
+  task: deny
 ---
 
 You are the final escalation tier for exceptionally difficult software

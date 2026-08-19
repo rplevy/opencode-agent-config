@@ -3,10 +3,8 @@ description: High-compute cloud specialist for difficult software engineering pr
 mode: subagent
 model: openai/gpt-5.6-luna
 reasoningEffort: xhigh
-permissions:
-  - action: subagent
-    resource: "*"
-    effect: deny
+permission:
+  task: deny
 ---
 
 You are a high-compute software engineering specialist.

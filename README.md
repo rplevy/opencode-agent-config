@@ -28,46 +28,81 @@ than what Qwen3.8 local (4-bit quantized) can handle.
 ## Orchestration Hierarchy
 
 ```
-                         GPT-5.6 Sol
-                         orchestrator
-                              │
-             ┌────────────────┼────────────────┐
-             │                │                │
-             ▼                ▼                ▼
-      Local Explorer     Local Worker    Cloud Escalation 1
-      Qwen3.8-27B        Qwen3.8-27B        Luna High
-       read-only          routine SWE       difficult
-             │                │                │
-             │                │                ▼
-             │                │         Cloud Escalation 2
-             │                │             Luna xHigh
-             │                │            very difficult
-             │                │                │
-             │                │                ▼
-             │                │         Cloud Escalation 3
-             │                │              Luna Max
-             │                │            exceptional
-             │                │
-             └────────────────┴───────────────┘
-                              │
-                              ▼
-                    Sol reviews, integrates,
-                      verifies, and delivers
+                            GPT-5.6 Sol
+                            orchestrator
+                                 │
+                  ┌──────────────┼──────────────┐
+                  ▼              ▼              ▼
+           Local Explorer   Local Worker   Cloud Escalation
+           Qwen3.8-27B      Qwen3.8-27B          │
+            read-only        routine SWE         │
+                                                  ▼
+                                             Luna High
+                                             difficult
+                                                  │
+                                     if unresolved/insufficient
+                                                  │
+                                                  ▼
+                                            back to Sol
+                                                  │
+                                                  ▼
+                                            Luna xHigh
+                                           very difficult
+                                                  │
+                                     if unresolved/insufficient
+                                                  │
+                                                  ▼
+                                            back to Sol
+                                                  │
+                                                  ▼
+                                             Luna Max
+                                            exceptional
+
+                  └──────────────┬──────────────┘
+                                 ▼
+                       Sol reviews, integrates,
+                         verifies, and delivers
 ```
 
-## setup
+The orchestrator invokes every tier directly. Escalation is progressive in
+the orchestrator's selection policy; subagents do not invoke other subagents.
 
-``` shell
-$ cd ~/$projects_dir/opencode-agent-config
-$ cd ~/.config/opencode
-$ ln -s ../../$projects_dir/opencode-agent-config/AGENTS.md .
-$ ln -s ../../$projects_dir/opencode-agent-config/agents .
+## Setup
+
+From the cloned repository:
+
+```shell
+repo_dir="$(pwd)"
+config_dir="$HOME/.config/opencode"
+
+mkdir -p "$config_dir"
+ln -s "$repo_dir/AGENTS.md" "$config_dir/AGENTS.md"
+ln -s "$repo_dir/agents" "$config_dir/agents"
+ollama pull qwen3.8:27b
 ```
 
-in ~/.config/opencode/opencode.json:
-```
+Register the local model and select the orchestrator in
+`~/.config/opencode/opencode.json`:
+
+```json
 {
   "$schema": "https://opencode.ai/config.json",
-  "default_agent": "orchestrator"
+  "default_agent": "orchestrator",
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "qwen3.8:27b": {
+          "name": "Qwen3.8 27B"
+        }
+      }
+    }
+  }
 }
 ```
+
+Ensure Ollama is running before starting OpenCode.
