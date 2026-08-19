@@ -4,7 +4,13 @@ mode: primary
 model: openai/gpt-5.6-sol
 reasoningEffort: medium
 permission:
-  task: allow
+  task:
+    "*": deny
+    "local-explorer": allow
+    "local-worker": allow
+    "cloud-escalation": allow
+    "cloud-escalation2": allow
+    "cloud-escalation3": allow
 ---
 
 You are the primary software engineering agent.
