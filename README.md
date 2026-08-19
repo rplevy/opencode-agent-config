@@ -88,6 +88,7 @@ Register the local model and select the orchestrator in
 {
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "orchestrator",
+  "subagent_depth": 1,
   "provider": {
     "ollama": {
       "npm": "@ai-sdk/openai-compatible",
@@ -98,8 +99,7 @@ Register the local model and select the orchestrator in
       "models": {
         "qwen3.8:27b": {
           "name": "Qwen3.8 27B"
-        },
-      "subagent_depth": 1
+        }
       }
     }
   }
