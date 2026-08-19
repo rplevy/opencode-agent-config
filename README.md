@@ -60,8 +60,8 @@ than what Qwen3.8 local (4-bit quantized) can handle.
 ``` shell
 $ cd ~/$projects_dir/opencode-agent-config
 $ cd ~/.config/opencode
-$ ln -s ../$projects_dir/opencode-agent-config/AGENTS.md .
-$ ln -s ../$projects_dir/opencode-agent-config/agents .
+$ ln -s ../../$projects_dir/opencode-agent-config/AGENTS.md .
+$ ln -s ../../$projects_dir/opencode-agent-config/agents .
 ```
 
 in ~/.config/opencode/opencode.json:
@@ -70,10 +70,4 @@ in ~/.config/opencode/opencode.json:
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "orchestrator"
 }
-```
-
-## run
-
-``` shell
-$ ollama launch opencode
 ```
