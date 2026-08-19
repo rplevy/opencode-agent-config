@@ -4,7 +4,10 @@ mode: subagent
 model: openai/gpt-5.6-luna
 reasoningEffort: max
 permission:
-  task: deny
+permissions:
+  - action: subagent
+    resource: "*"
+    effect: deny
 ---
 
 You are the final escalation tier for exceptionally difficult software
